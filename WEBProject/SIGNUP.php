@@ -35,6 +35,7 @@ session_start();
             <form method="POST" action="signup.inc.php">
                 <input type="text" name="firstname" placeholder="First Name"><br>
                 <input type="text" name="secondname" placeholder="Second Name"><br>
+                <input type="text" name="email" placeholder="Email"><br>
                 <input type="text" name="username" placeholder="Username"><br>
                 <input type="password" name="password" placeholder="Password"><br>
                 <input type="submit" value="Sign UP"<br>
@@ -47,6 +48,12 @@ session_start();
                         echo '<p style="text-align: center;color: red;font-size: 20px">This username is already used!</p>';
                 else if (isset($_GET['info']) && $_GET['info']=='eroare')
                         echo '<p style="text-align: center;color: red;font-size: 20px">Complete the empty fields!</p>';
+                else if (isset($_GET['info']) && $_GET['info']=='lowpws')
+                        echo '<p style="text-align: center;color: red;font-size: 20px">The password must have atleast 6 caracters!</p>';
+                else if (isset($_GET['info']) && $_GET['info']=='email')
+                    echo '<p style="text-align: center;color: red;font-size: 20px">Invalid email!</p>';
+                else if (isset($_GET['info']) && $_GET['info']=='userwrong')
+                    echo '<p style="text-align: center;color: red;font-size: 20px">Invalid username!The username must not contain any symbols or spaces!</p>';
             ?>
 
             <br>

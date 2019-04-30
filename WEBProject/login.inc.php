@@ -7,7 +7,11 @@ if(isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['pass
 
     $username = strtolower($_POST['username']);
     $password = $_POST['password'];
-
+    if(ctype_alnum($username)==FALSE)
+    {
+        header("Location: index.php?info=wrong");
+        die;
+    }
     $sql = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($connect, $sql);
 

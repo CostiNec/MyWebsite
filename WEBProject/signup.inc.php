@@ -7,8 +7,27 @@ if(!empty( $_POST['firstname']) && !empty($_POST['secondname']) && !empty($_POST
 
     $firstname = $_POST['firstname'];
     $secondname = $_POST['secondname'];
+    $email = $_POST['email'];
     $username = strtolower($_POST['username']);
     $password = $_POST['password'];
+    $domain = strstr($email, '@');
+
+    if(ctype_alnum($username)==FALSE)
+    {
+        header("Location: SIGNUP.php?info=userwrong");
+        die();
+    }
+
+    if(strlen($domain)<2)
+    {
+        header("Location: SIGNUP.php?info=email");
+        die();
+    }
+    if(strlen($password)<6)
+    {
+        header("Location: SIGNUP.php?info=lowpws");
+        die();
+    }
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
     $sql = "SELECT username FROM users WHERE username='$username'";
@@ -20,7 +39,7 @@ if(!empty( $_POST['firstname']) && !empty($_POST['secondname']) && !empty($_POST
         die();
     }
     else{
-        $sql = "INSERT INTO users (firstname, secondname, username, password) VALUES('$firstname','$secondname','$username','$password_hashed')";
+        $sql = "INSERT INTO users (firstname, secondname,email, username, password) VALUES('$firstname','$secondname','$email','$username','$password_hashed')";
         $result = mysqli_query($connect, $sql);
         header("Location: SIGNUP.php?info=ok");
     }

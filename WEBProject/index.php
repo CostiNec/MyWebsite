@@ -22,8 +22,16 @@ session_start();
 
             <div class="nav">
                 <ul>
-                    <li><a href="index.php">HOME</a></li>
-                    <li><a href="SIGNUP.php">SIGN UP</a></li>
+                    <?php
+                    if(!isset($_SESSION['ID']))
+                    {
+                        echo ' <li><a href="index.php">HOME</a></li>
+                    <li><a href="SIGNUP.php">SIGN UP</a></li> ';
+                    }
+                    else {
+                        echo ' <li><a href="index.php">HOME</a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>
@@ -48,14 +56,16 @@ session_start();
     }
     else
     {
+        echo 'You are logged, '.$_SESSION['username'];
         echo '<div class="login">
-        <div class="container">
+        
             <h1>Welcome!</h1>
             <br>
+            
             <form method="POST" action="logout.inc.php">
                 <input class="login"  type="submit" value="Log Out">
                </form>
-        </div>
+       
     </div>';
     }
     ?>
